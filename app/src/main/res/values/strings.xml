@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SecondhandBooks</string>
+
+    <!-- This is the missing string resource for your HomeActivity's title -->
+    <string name="title_activity_home">Home</string>
+    <string name="back_button_desc">Back</string>
+
+</resources>

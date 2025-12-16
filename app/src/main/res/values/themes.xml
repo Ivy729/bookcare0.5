@@ -1,0 +1,31 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Bookcare_authentication" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/button_color</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="sectionHeaderColor">@android:color/black</item>
+
+        <!-- START: THIS IS THE FINAL, CRITICAL FIX (Part 1) -->
+        <!-- Define the default background color for the entire app -->
+        <item name="android:colorBackground">@color/app_background</item>
+        <!-- END: THIS IS THE FINAL, CRITICAL FIX (Part 1) -->
+
+    </style>
+
+    <!-- This is your main, default theme. It now correctly inherits the green background. -->
+    <style name="Theme.Bookcare_authentication" parent="Base.Theme.Bookcare_authentication" />
+
+    <!-- This is your Blue Mode theme. -->
+    <style name="Theme.Bookcare_authentication.Blue" parent="Base.Theme.Bookcare_authentication">
+        <!-- START: THIS IS THE FINAL, CRITICAL FIX (Part 2) -->
+        <!-- This line correctly OVERRIDES the default green background with blue. -->
+        <item name="android:colorBackground">@color/blue_mode_background</item>
+        <!-- END: THIS IS THE FINAL, CRITICAL FIX (Part 2) -->
+    </style>
+
+</resources>
