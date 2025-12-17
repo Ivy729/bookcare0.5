@@ -1,8 +1,9 @@
 package com.example.bookcare_authentication;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
@@ -14,12 +15,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // --- START: BLUE MODE THEME LOGIC ---
+        SharedPreferences sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE);
+        boolean isBlueMode = sharedPreferences.getBoolean("isBlueMode", false);
+        if (isBlueMode) {
+            setTheme(R.style.Theme_Bookcare_authentication_Blue);
+        }
+        // --- END: BLUE MODE THEME LOGIC ---
+
         super.onCreate(savedInstanceState);
+
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        setSupportActionBar(binding.toolbar);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
@@ -27,33 +36,21 @@ public class MainActivity extends AppCompatActivity {
         if (navHostFragment != null) {
             NavController navController = navHostFragment.getNavController();
             NavigationUI.setupWithNavController(binding.navView, navController);
-            NavigationUI.setupActionBarWithNavController(this, navController);
 
             navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-                ActionBar actionBar = getSupportActionBar();
-                if (actionBar == null) {
-                    return;
-                }
-
                 int destinationId = destination.getId();
 
                 if (destinationId == R.id.welcomeFragment ||
                         destinationId == R.id.loginFragment ||
                         destinationId == R.id.registerFragment ||
                         destinationId == R.id.forgotPasswordFragment) {
-                    actionBar.hide();
                     binding.navView.setVisibility(View.GONE);
                 } else {
-                    actionBar.show();
                     binding.navView.setVisibility(View.VISIBLE);
                 }
             });
         }
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = ((NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment)).getNavController();
-        return navController.navigateUp() || super.onSupportNavigateUp();
-    }
+    // onSupportNavigateUp is no longer needed as we've removed the ActionBar.
 }

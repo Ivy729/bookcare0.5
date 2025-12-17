@@ -12,9 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 import com.example.bookcare_authentication.R;
 import com.example.bookcare_authentication.databinding.FragmentUserProfileBinding;
 import com.example.bookcare_authentication.SharedViewModel;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserProfileFragment extends Fragment {
 
@@ -51,6 +54,25 @@ public class UserProfileFragment extends Fragment {
                 navController.navigate(R.id.action_navigation_home_to_ecoPointsFragment)
         );
         // --- END: THIS IS THE FIX ---
+
+        // Setup Recommendations RecyclerView
+        List<Book> recommendations = new ArrayList<>();
+        recommendations.add(new Book("The Silent Patient", "Alex Michaelides", "Thriller"));
+        recommendations.add(new Book("Educated", "Tara Westover", "Memoir"));
+        recommendations.add(new Book("Where the Crawdads Sing", "Delia Owens", "Fiction"));
+        recommendations.add(new Book("The Vanishing Half", "Brit Bennett", "Fiction"));
+        recommendations.add(new Book("The Midnight Library", "Matt Haig", "Fantasy"));
+        recommendations.add(new Book("Klara and the Sun", "Kazuo Ishiguro", "Sci-Fi"));
+        recommendations.add(new Book("Project Hail Mary", "Andy Weir", "Sci-Fi"));
+        recommendations.add(new Book("The Four Winds", "Kristin Hannah", "Horror"));
+        recommendations.add(new Book("The Song of Achilles", "Madeline Miller", "Fantasy"));
+        recommendations.add(new Book("Circe", "Madeline Miller", "Fantasy"));
+        recommendations.add(new Book("The Seven Husbands of Evelyn Hugo", "Taylor Jenkins Reid", "Fiction"));
+        recommendations.add(new Book("Malibu Rising", "Taylor Jenkins Reid", "Fiction"));
+
+        RecommendationAdapter adapter = new RecommendationAdapter(recommendations);
+        binding.recyclerViewRecommendations.setLayoutManager(new GridLayoutManager(requireContext(), 2));
+        binding.recyclerViewRecommendations.setAdapter(adapter);
     }
 
     @Override
