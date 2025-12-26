@@ -1,5 +1,6 @@
 package com.example.bookcare_authentication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,7 @@ public class EcoPointsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Handle system bar insets
-        ViewCompat.setOnApplyWindowInsetsListener(binding.ecoPointsLayout, (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(
                     systemBars.left,
@@ -49,7 +50,19 @@ public class EcoPointsFragment extends Fragment {
 
         // Navigation back button
         NavController navController = Navigation.findNavController(view);
-        binding.buttonBack.setOnClickListener(v -> navController.navigateUp());
+        binding.backButton.setOnClickListener(v -> navController.navigateUp());
+
+        // Book Exchange Box Click Listener
+        binding.bookExchangeBox.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), activity_book_exchange.class);
+            startActivity(intent);
+        });
+
+        // Book Donation Box Click Listener
+        binding.bookDonationBox.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), activity_book_donation.class);
+            startActivity(intent);
+        });
     }
 
     @Override
